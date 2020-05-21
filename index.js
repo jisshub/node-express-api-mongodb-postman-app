@@ -13,12 +13,13 @@ empApp.listen(PORT, 'localhost', ()=>{
 // parse the json data.
 empApp.use(express.json());
 
-// use the router object 
+// conacatenate routerObj with /api
 empApp.use("/api", routerObj);
 
 // connect to mongodb
 mongoose.connect("mongodb://localhost/employeedb", { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
+
 
 
 

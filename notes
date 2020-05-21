@@ -13,7 +13,7 @@ set up express app
 app should listen to a port number
 
 
-handing request
+Handling request
 ----------------
 // listen to get requests,
 
@@ -115,9 +115,6 @@ test the routes or endpoints
 ------------------
 using postman,
 
-
-tested our ap
-
 handling post request
 ------------------------
 
@@ -206,6 +203,8 @@ const empModelSchema = new empSchema(
 // create an employee model
 const EmpModel = mongoose.model("employeeCol", EmpSchema)
 
+will create a 'employecols' collection automatically
+
 
 empployeeCol - wiil be rthe collection
 EmpSchema - schema that follows the collection.
@@ -239,6 +238,7 @@ in post request
     EmpModel.create(req.body)
        -it gives us a Promise to get the json data as response we have to apply then 
         which will sent the json data once the instabce us created and saved to db.
+
 
 emp_api.js
 ------------

@@ -18,10 +18,11 @@ routerObj.get("/employees/:id", (req, res)=>{
 });
 
 // get employee by name and team
-routerObj.get("employees/", (req, res) =>{
-    EmpModel.find({name: req.query.name,
-         team: req.query.team})
-         .then(empData => res.send(empData));
+routerObj.get("/employees", (req, res) =>{
+    EmpModel.find({
+            name: req.query.name
+        }).find({team: req.query.team})
+    .then(empData => res.send(empData));
 });
 
 routerObj.post("/employees", (req, res, next)=>{

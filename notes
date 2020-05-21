@@ -251,9 +251,53 @@ routerObj.post("/employees", (req, res)=>{
 });
 
 
+handling errors,
+--------------------
+emp_api.js
+--------------
+
+
+routerObj.post("/employees", (req, res, next)=>{
+    // save to db - sent response as json
+    EmpModel.create(req.body).then((empData) => 
+    res.send(empData))
+    .catch(next);
+});
+
+if there is error while saving data to db, move on to next
+middleware by invoking catch(next),
+
+
+index.js
+---------
+sent err message ro user ans change status code to 422,
+
+empApp.use((err, req, res, next)=>{
+    res.status(422).send({error: err.message});
+});
 
 
 
+
+sample json
+--------------
+
+[
+	{
+		"firstName": "User",
+		"lastName": "Two",
+		"dob": "10-10-1966",
+		"qualification": "Degree",
+		"desgination": "trainee"
+	},
+	{
+		"firstName": "User",
+		"lastName": "Three",
+		"dob": "10-10-1926",
+		"qualification": "Btech",
+		"desgination": "associate"
+	}
+]
 
 
 

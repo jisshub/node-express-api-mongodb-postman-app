@@ -8,10 +8,11 @@ routerObj.get("/employees", (req, res)=>{
     res.send({type: "GET"});
 });
 
-routerObj.post("/employees", (req, res)=>{
+routerObj.post("/employees", (req, res, next)=>{
     // save to db - sent response as json
-    EmpModel.create(req.body).then((empData) => 
-    res.send(empData));
+    EmpModel.create(req.body).then(empData => {
+        res.send(empData);
+    }).catch(next);
 });
 
 routerObj.put("/employees/:id", (req, res)=>{

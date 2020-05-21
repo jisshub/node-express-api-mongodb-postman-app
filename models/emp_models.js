@@ -6,13 +6,13 @@ const Schema = mongoose.Schema;
 // create an instance of schema
 const EmpSchema = new Schema(
     {
-        firstName: {
+        _id: {
+            type: String,
+            required: [true, "Id is required"]
+        },
+        name: {
             type: String,
             required: [true, "First Name is required"] 
-        },
-        lastName: {
-            type: String,
-            required: [true, "Last Name Field is re"]
         },
         dob: {
             type: String,
@@ -25,6 +25,10 @@ const EmpSchema = new Schema(
         designation: {
             type: String,
             required: [true, "designation is required"]
+        },
+        team: {
+            type: String,
+            required: [true, "team is required"]
         }
     });
 

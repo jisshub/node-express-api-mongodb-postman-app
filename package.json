@@ -1,0 +1,19 @@
+{
+  "name": "employeeapp-api",
+  "version": "1.0.0",
+  "description": "employee application using node ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "author": "Jissmon Jose",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "type": "module"
+}

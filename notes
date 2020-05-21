@@ -1,0 +1,170 @@
+install nodemon
+
+> npm install nodemon -D
+
+install express
+
+> npm install express --save
+
+create entry point - index.js
+
+set up express app
+
+app should listen to a port number
+
+
+handing request
+----------------
+// listen to get requests,
+
+empApp.get('/api', (req, res) => {
+    // send the response
+    res.send("Hello World!")
+});
+
+
+navigate to localhost:3000/api 
+
+
+get request
+----------
+nedd to retrieve some data,
+
+
+
+
+CREATE A SPERATE FODER FOR HANDLING THE routes
+-----------------------
+> mkdir routes
+> cd routes
+
+> routes
+    -emp_appi.js
+
+    create a router object
+
+    // router object
+    export const routerObj = express.Router();
+
+    // sepcidy all routes handlers user
+    // get the employees
+routerObj.get("/employees", (req, res)=>{
+    res.send({type: "GET"});
+});
+
+emp_api.js
+------------
+import express from "express";
+
+// router object
+export const routerObj = express.Router();
+
+// get the employees
+routerObj.get("/employees", (req, res)=>{
+    res.send({type: "GET"});
+});
+
+// POST the employee
+routerObj.post("/employees", (req, res)=>{
+    res.send({type: "POST"});
+});
+
+
+// PUT the employee
+routerObj.put("/employees/:id", (req, res)=>{
+    res.send({type: "PUT"});
+});
+
+
+// DELETE the employee
+routerObj.delete("/employees/:id", (req, res)=>{
+    res.send({type: "DELETE"});
+});
+
+
+index.js
+-----------------
+
+// use the router object 
+empApp.use("/api", routerObj);
+
+/api will concatenate with the routes we navigates to,
+
+eg:
+/api/employees
+
+
+import express from "express";
+import {routerObj} from "./routes/emp_api.js";
+
+export const empApp = express();
+
+// set up a port
+const PORT = process.env.PORT || 3000;
+
+// listen to PORT
+empApp.listen(PORT, 'localhost', ()=>{
+    console.log(`Server runing on PORT ${PORT}`);
+});
+
+// use the router object 
+empApp.use("/api", routerObj);
+
+
+test the routes or endpoints
+------------------
+using postman,
+
+
+tested our ap
+
+handling post request
+------------------------
+
+index.js
+-----------
+import express from "express";
+import {routerObj} from "./routes/emp_api.js";
+
+export const empApp = express();
+// set up a port
+const PORT = process.env.PORT || 3000;
+// listen to PORT
+empApp.listen(PORT, 'localhost', ()=>{
+    console.log(`Server runing on PORT ${PORT}`);
+});
+
+// parse the json data.
+empApp.use(express.json());
+
+// use the router object 
+empApp.use("/api", routerObj);
+
+
+emp_api.js
+----------------------
+// POST the employee
+routerObj.post("/employees", (req, res)=>{
+    console.log(req.body);
+    // send response to postman
+    res.send(
+        {
+            type: "POST",
+            empName: req.body.empName,
+            empId: req.body.empId
+        }
+    );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+

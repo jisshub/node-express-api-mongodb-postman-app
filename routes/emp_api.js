@@ -1,4 +1,5 @@
 import express from "express";
+import { EmpModel } from "../models/emp_models.js";
 
 // router object
 export const routerObj = express.Router();
@@ -10,25 +11,18 @@ routerObj.get("/employees", (req, res)=>{
 
 // POST the employee
 routerObj.post("/employees", (req, res)=>{
-    console.log(req.body);
-    // send response to postman
-    res.send(
-        {
-            type: "POST",
-            empName: req.body.empName,
-            empId: req.body.empId
-        }
-    );
+    // save to db - sents response as json
+    EmpModel.create(req.body).then((empData) => 
+    res.send(empData));
 });
-
 
 // PUT the employee
 routerObj.put("/employees/:id", (req, res)=>{
     res.send({type: "PUT"});
 });
 
-
 // DELETE the employee
 routerObj.delete("/employees/:id", (req, res)=>{
     res.send({type: "DELETE"});
 });
+

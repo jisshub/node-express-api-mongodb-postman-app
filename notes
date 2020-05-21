@@ -157,8 +157,98 @@ routerObj.post("/employees", (req, res)=>{
 });
 
 
+models and schemas
+-----------------
+
+install mongoose
+
+> npm i mongoose
+
+create a models folder,
+
+> mkdir -v models
+    > touch emp_models.js
+
+emp_models.js
+------------------
+import mongoose from mongoose;
+
+// create schema
+const empSchema = mongoose.Schema;
+
+// create an instance of schema
+const empModelSchema = new empSchema(
+    {
+        firstName: {
+            type: String,
+            required: [true, "First Name is required"] 
+        },
+        lastName: {
+            type: String,
+            required: [true, "Last Name Field is re"]
+        },
+        dob: {
+            type: Date,
+            required: [true, "DOB is required"]
+        },
+        qualification:{
+            type: String,
+            required: [true, "qualification is required"]
+        },
+        designation: {
+            type: String,
+            required: [true, "designation is required"]
+        }
+    }
+)
 
 
+// create an employee model
+const EmpModel = mongoose.model("employeeCol", EmpSchema)
+
+
+empployeeCol - wiil be rthe collection
+EmpSchema - schema that follows the collection.
+
+
+// export employee model
+export const EmpModel = mongoose.model("employeeCol", EmpSchema);
+
+
+conencting to mongodb Server
+---------------------
+
+
+index,js
+------
+> connect to employeedb databasee
+mongoose.connect("mongodb://localhost/employeedb", { useNewUrlParser: true });
+
+> set mongoose promise to globhal promise
+
+mongoose.Promise = global.Promise
+
+emp_api.js
+--------
+create a instance of employee model 
+in post request
+
+    EmpModel.create(req.body).then((empData) => 
+    res.send(empData));
+
+    EmpModel.create(req.body)
+       -it gives us a Promise to get the json data as response we have to apply then 
+        which will sent the json data once the instabce us created and saved to db.
+
+emp_api.js
+------------
+
+// POST the employee
+routerObj.post("/employees", (req, res)=>{
+    // save to db - sents response as json
+    EmpModel.create(req.body).then((empData) => 
+    res.send(empData));
+});
 
 
 

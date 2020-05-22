@@ -12,17 +12,8 @@ routerObj.get("/employees/:id", (req, res)=>{
 
 // get employee by name and team
 routerObj.get("/employees", (req, res) =>{
-    const query = EmpModel.find();
-    const name = req.query.name;
-    const team = req.query.team;
-    console.log(team);
-    console.log(name);
-    if ((team.length > 0) & (name.length > 0)) {
-        query.where({name: name, team: team})
-    }
-    query.exec((err, empData) => {
-            res.json({EmpModel: empData})
-    });
+    EmpModel.find().where({name: req.query.name, team: req.query.team})
+    .then((empData) => res.send(empData));
 });
 
 // get all employees

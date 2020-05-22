@@ -278,27 +278,9 @@ empApp.use((err, req, res, next)=>{
 
 
 
-
-sample json
---------------
-
-[
-	{
-		"firstName": "User",
-		"lastName": "Two",
-		"dob": "10-10-1966",
-		"qualification": "Degree",
-		"desgination": "trainee"
-	},
-	{
-		"firstName": "User",
-		"lastName": "Three",
-		"dob": "10-10-1926",
-		"qualification": "Btech",
-		"desgination": "associate"
-	}
-]
-
+get by employeename and team
+---------------------------
+localhost:3000/api/employees/?name=Akhil&team=development
 
 
 

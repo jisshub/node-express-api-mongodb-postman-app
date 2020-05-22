@@ -20,7 +20,7 @@ empApp.use("/api", routerObj);
 empApp.use((err, req, res, next)=>{
     res.status(422).send({error: err.message});
 });
- 
+
 // connect to mongodb
 mongoose.connect("mongodb://localhost/employeedb", { useNewUrlParser: true });
 mongoose.Promise = global.Promise;

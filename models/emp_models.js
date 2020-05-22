@@ -29,6 +29,14 @@ const EmpSchema = new Schema(
         team: {
             type: String,
             required: [true, "team is required"]
+        },
+        email: {
+            type: String,
+            required: [true, "email is required"]
+        },
+        notification: {
+            type: String,
+            required: [false]
         }
     });
 

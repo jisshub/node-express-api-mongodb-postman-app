@@ -5,10 +5,11 @@ import nodemailer from "nodemailer";
 // router object
 export const routerObj = express.Router();
 
-// get employee by id
-routerObj.get("/employees/:id", (req, res)=>{
-    EmpModel.findById({_id: req.params.id})
-    .then(empData => res.send(empData));
+// get all employees
+routerObj.get("/employees", (req, res)=>{
+    EmpModel.find().then(empData => {
+        res.send(empData);
+    })
 });
 
 // get employee by name and team
@@ -17,12 +18,12 @@ routerObj.get("/employees", (req, res) =>{
     .then((empData) => res.send(empData));
 });
 
-// get all employees
-routerObj.get("/employees", (req, res)=>{
-    EmpModel.find({}).then(empData => {
-        res.send(empData);
-    })
+// get employee by id
+routerObj.get("/employees/:id", (req, res)=>{
+    EmpModel.findById({_id: req.params.id})
+    .then(empData => res.send(empData));
 });
+
 
 routerObj.post("/employees", (req, res, next)=>{
     // save to db - sent response as json
@@ -54,9 +55,28 @@ routerObj.post("/employees", (req, res, next)=>{
         return res.status(200).send({
             "status": true,
             "message": "Email send successfull"
+            });    
         });
-    });
-    // update db with text
-    EmpModel.updateOne({"_id": req.body._id}, {$set: {notification: mailOptions.text}});
+        
 
+        // update the db with notfication,
+        
+        // routerObj.patch(`employees/${req.body._id}`, (req, res, next) => {
+        //     EmpModel.findByIdAndUpdate(req.body._id, req.body, {
+        //         notification: mailOptions.text
+        //     },
+        //         function(err, model) {
+        //             if (!err) {
+        //                 res.status(201).json({
+        //                     data: model
+        //                 });
+        //             } else {
+        //                 res.status(500).json({
+        //                     message: "not found"
+        //                 })
+        //             }
+        //         }
+        //     )    
+        // })
 });
+
